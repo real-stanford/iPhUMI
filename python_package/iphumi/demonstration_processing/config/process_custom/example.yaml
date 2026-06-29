@@ -1,0 +1,7 @@
+# @package _global_
+
+# here's an example of how you would provide custom overrides to process_demos_iphone.
+# on the command line provide "process_custom=example"
+
+align_validate:
+  left_right_min_distance: "<=0.3"

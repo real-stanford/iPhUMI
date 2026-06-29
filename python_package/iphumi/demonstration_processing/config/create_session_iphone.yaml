@@ -1,0 +1,20 @@
+demonstrations_dir: tmp_demonstrations
+sessions_dir: tmp_sessions
+input_name_filters: []
+input_session_filters: []
+input_task_filters: []
+output_session_name: ''
+max_demos: -1
+overwrite: false
+include_invalid: false # If false, demonstrations with an invalid.txt file are excluded from the session
+sides: ''  # sides mode: left, right, head, single, bimanual, left_and_head, right_and_head, single_and_head, bimanual_and_head (empty = auto-detect from demos)
+strict_side_matching: true  # if true, demos must have exactly the sides the mode specifies (e.g. bimanual won't match bimanual_and_head)
+
+# don't log hydra job
+defaults:
+  - override hydra/job_logging: disabled
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

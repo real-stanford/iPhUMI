@@ -1,0 +1,12 @@
+defaults:
+  - _self_
+  - override hydra/job_logging: disabled
+
+demonstrations_dir: 'tmp_demonstrations'  # Destination directory
+shared_path: ''                           # Required: path to shared data (zip file or directory)
+overwrite: false                          # If true, delete existing folder before copying
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

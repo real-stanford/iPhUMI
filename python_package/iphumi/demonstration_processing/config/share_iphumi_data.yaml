@@ -1,0 +1,26 @@
+# Run with: python share_iphumi_data.py output_name=my_export
+# Override specific settings: python share_iphumi_data.py share_custom=my_config
+
+defaults:
+  - _self_
+  - override hydra/job_logging: disabled
+
+demonstrations_dir: 'tmp_demonstrations'
+output_name: ''  # Required: output folder name under tmp_sharing/
+raw_only: true   # If true, only copy raw iPhone files (json, rgb, depth, etc.); if false, copy entire folder
+exclude_depth: false  # If true, exclude depth files (_depth.raw, _depthpreview.mp4) from raw exports
+overwrite: false
+zip: true         # If true, zip the output folder after copying
+
+## Filter demonstrations (same options as process_demos_iphone)
+filters:
+  demonstration_names: null  # List of specific demonstration names to include
+  demonstration_regex: null  # Regex to match demonstration folder names
+  session_name: null         # Session name(s) to include (string or list)
+  task_names: null           # Include only demos containing at least one of these task names
+  max_demos: -1              # Maximum number of demonstrations to export (-1 for all)
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

@@ -1,0 +1,24 @@
+session_dir: ''
+overwrite: false
+output_format: zarr  # zarr | lerobot (lerobot not yet implemented)
+task_names: [] # Only including these task names in the replay buffer, by default includes all tasks
+stages:
+  - dataset_plan
+  - replay_buffer
+
+replay_buffer:
+  include_depth: false
+  pad_depth_to_square: false  # if true, letterbox-pads depth to a square before saving
+  num_workers: -1
+  upsample_ultrawide_to_full_frequency: false  # if true, ultrawide is stored at 60 Hz (one entry per aligned frame); if false (default), ultrawide is stored at its native ~10 Hz with upsample/downsample index metadata
+  include_demo_start_end_pose: false  # if true, gripper_{side}_demo_start_pose and gripper_{side}_demo_end_pose are included in the replay buffer
+  max_episodes: null  # limit number of demonstrations; null = use all
+
+# don't log hydra job
+defaults:
+  - override hydra/job_logging: disabled
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

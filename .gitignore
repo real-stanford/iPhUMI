@@ -1,0 +1,8 @@
+.DS_Store
+*.egg-info
+*.pyc
+__pycache__
+.vscode/**
+!.vscode/*.code-workspace
+**/tmp**
+**/iphumi_example_data

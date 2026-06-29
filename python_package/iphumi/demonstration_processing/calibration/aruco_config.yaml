@@ -1,0 +1,8 @@
+aruco_dict:
+  predefined: DICT_4X4_50
+marker_size_map: # these are the size of the AR tags on the gripper
+  default: 0.016
+  0: 0.016
+  1: 0.016
+  6: 0.016
+  7: 0.016

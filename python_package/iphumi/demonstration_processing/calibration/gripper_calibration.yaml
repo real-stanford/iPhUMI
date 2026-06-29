@@ -1,0 +1,11 @@
+# this contains information about how the iPhone is positioned on the gripper with respect to the the TCP frame. This is determined by your specific gripper design and the iPhone mount.
+# see the picture showing coordinate frame convention in usage.md
+# look at usage.md for a picture of the coordinate from convention for iPhone and TCP for the gripper
+# the keys are the iPhone identifier. You can see this mapping here: https://github.com/souzainf3/RNDeviceName/blob/master/Sources/Models/Device%2BMapper.swift
+# the camera calibration parameters are stored in the demonstration data. You will need to specify gripper_transform for new devices.
+
+default: # this is the default gripper ID set in the app, if you set a new gripper ID you will need to add a new entry
+  "iPhone16,1": # iPhone 15 Pro using the provided mount
+    gripper_transform:
+      tcp_pose_in_arkit_frame: [[1, 0, 0, 0], [0, -0.9659258, 0.25881904, -0.06441], [0, -0.25881904, -0.9659258, -0.211397], [0, 0, 0, 1]] # geometrically the motion from the ARKit frame to the TCP frame (I_T_TCP). You can take this matrix (I_T_TCP) and multiply by an ARKit pose (W_T_I) to get the TCP pose in the world frame: W_T_TCP = W_T_I @ I_T_TCP. This was computed using the compute_iphone15pro_calibration.py script. If you add a new mount for a new phone, it probably should have the exact same TCP pose as shown here to retain maximal data compatibility.
+      artag_z_distance_from_ultrawide: 0.098079 # distance in meters along optical z axis (pointing away from you) from ultrawide camera center to the center of the AR tags on the finger (unlike ARkit, here we assume Z axis is pointing outwards from the camera (away from you)). This only needs to be roughly correct as it is only used to filter out tag detection outliers that are too far away from the ultrawide camera, so it doesn't need to be super precise.

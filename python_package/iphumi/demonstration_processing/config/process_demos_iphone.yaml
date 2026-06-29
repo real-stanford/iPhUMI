@@ -1,0 +1,104 @@
+# if you want to change these configs for your particular task/setup I would add a file in config/process_custom such as my_config.yaml and then on the command line do "process_custom=my_config" to override any config in this file)
+
+# don't log hydra job
+defaults:
+  - _self_
+  - optional process_custom: null  # Task-specific overrides; use process_custom=<name> on CLI (e.g. process_custom=example)
+  - override hydra/job_logging: disabled
+
+demonstrations_dir: 'tmp_demonstrations' # Directory name for output demonstrations
+stages: null # List of stage names to run. If null then rull all stages (see process_demos.py for stage names)
+skip_stages: [] # Stages to skip (removes entries from `stages`)
+overwrite: false # If demonstration already exists in output directory, overwrite it
+num_workers: null # Number of parallel workers for stages that support it. null = CPU count
+visualization_height: 480 # Height (px) of each individual data stream tile in visualization outputs; widths are 4:3
+
+## Filter demonstrations with the following parameters
+filters:
+  demonstration_names: null # List of specific demonstrations to process. If not specified, then process all demonstrations
+  demonstration_regex: null # Regex filter to only process demonstrations that match this filter
+  session_name: null # Process only demonstrations with this session name (can be a single string or list of strings)
+  task_names: null # Process only demonstrations that contain a task that intersects with the task names in this list
+  max_demos: -1 # Maximum number of demonstrations to process. -1 for all demonstrations
+  max_position_delta: null # Maximum position delta (m) between consecutive frames for a demonstration to be considered valid (you likely have SLAM issues if you're having to increase beyond 0.015)
+
+## Parameters for each stage
+group:
+  overwrite: ${..overwrite}
+  demonstrations_dir: ${..demonstrations_dir}
+  filters: ${..filters}
+  iphone_dir: '/Volumes/MySDCard/iPhUMI_export' # Directory name for iPhone data
+  symlink: false # Create symlinks to demonstration data instead of copy it
+  skip_left: false # Skip processing left gripper data
+  skip_right: false # Skip processing right gripper data
+  gripper_calibration: 'calibration/gripper_calibration.yaml'
+
+group_validate:
+  overwrite: ${..overwrite}
+
+detect:
+  overwrite: ${..overwrite}
+  aruco_config: 'calibration/aruco_config.yaml'
+  num_workers: ${..num_workers}
+
+calibrate:
+  overwrite: ${..overwrite}
+  tag_det_threshold: 0.2
+
+label:
+  overwrite: ${..overwrite}
+  progression:
+    mode: linear
+  task_extraction:
+    visualize: true # output a video with subtask label overlay
+    output_height: ${...visualization_height} # height of the subtask overlay video
+    mode_narration:
+      subtask_end_period: 0.5 # how much time can pass before we consider the narration to be referring to a new subtask
+    mode_gripper_width:
+      gradient_threshold: 0.1 # We take the max of the gradient of the gripper width at all timesteps and multiply this value to determine a threshold for when to consider the gripper opening or closing
+      visualize: false # plot that shows subtask segmentation as a function of gripper width
+      pad_subtask_seconds: 0.5 # how much time (in seconds) to include at the end of the previous subtask in the current subtask
+
+align:
+  overwrite: ${..overwrite}
+  fps: 60
+
+align_validate:
+  fps: ${..align.fps} # Frame rate of aligned data, used to convert m/s thresholds to per-frame deltas
+  overwrite: ${..overwrite}
+  clear_invalid: false # If true, delete all invalid.txt files without running any checks
+  print_stats: false # Print computed initial gripper distances for every demonstration
+  
+  # validation checks:
+  enable_initial_gripper_to_gripper_distance_check: true # Check the initial left-right distance between grippers
+  max_initial_gripper_to_gripper_distance: 1.50 # Max allowed initial left-right distance (m). Null to skip check
+  max_initial_gripper_to_gripper_x_distance: 1.00 # Max allowed initial |x| offset in left ARKit frame (m). Null to skip check
+  max_initial_gripper_to_gripper_y_distance: 0.50 # Max allowed initial |y| offset in left ARKit frame (m). Null to skip check
+  max_initial_gripper_to_gripper_z_distance: 0.50 # Max allowed initial |z| offset in left ARKit frame (m). Null to skip check
+  max_initial_gripper_angle_apart: 150 # Max allowed initial angle between left and right ARKit orientations (degrees). Null to skip check
+  max_initial_gripper_to_head_distance: 2.00 # Max allowed initial gripper-to-head distance (m), applied to both left and right. Null to skip check
+  max_pose_delta_m_per_s: 3.00 # Max allowed position change rate (m/s), checked per side. Null to skip check
+  detect_flipped_grippers: true # Mark invalid if right gripper is to the left of left gripper in left ARKit frame (grippers held in wrong hands)
+  # Trajectory-wide ARKit distance checks (checked over all frames, not just initial).
+  # Each value is a condition string or list of condition strings, e.g. ">=0.3" or [">=0.3", "<=2.0"]. Null to skip.
+  left_right_min_distance: null # Condition(s) that the minimum left-right distance over the full trajectory must satisfy (m)
+  left_right_max_distance: null # Condition(s) that the maximum left-right distance over the full trajectory must satisfy (m)
+  left_head_min_distance: null # Condition(s) that the minimum left-head distance over the full trajectory must satisfy (m)
+  left_head_max_distance: null # Condition(s) that the maximum left-head distance over the full trajectory must satisfy (m)
+  right_head_min_distance: null # Condition(s) that the minimum right-head distance over the full trajectory must satisfy (m)
+  right_head_max_distance: null # Condition(s) that the maximum right-head distance over the full trajectory must satisfy (m)
+
+visualize:
+  overwrite: ${..overwrite}
+  visualize_til_frame: -1 # Visualize until this frame in the video. -1 for all frames
+  trajectory_render_size: ${..visualization_height} # Output height of the visualization; all panels are scaled to this height at 4:3 aspect ratio
+  depth_max_distance: 0.5 # Maximum distance for depth visualization; crop everything beyond this distance
+  parallel: true # Process demonstrations in parallel
+  suppress_output_if_parallel: true # Suppress subprocess stdout/stderr (EGL, tqdm) when running in parallel; errors are still shown
+  num_workers: ${..num_workers} # used only if parallel is true
+  max_workers: 10 # Maximum number of parallel workers; caps num_workers when parallel is true
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
