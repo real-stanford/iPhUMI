@@ -54,7 +54,13 @@ We thank the following people for their contributions that helped make this proj
 If you found iPhUMI useful in your research, please cite [Behavior Prompting Policy](https://behavior-prompting.github.io/):
 
 ```
-Coming soon
+@article{patel2026bpp,
+  title={Behavior Prompting Policy: Demonstrations as Prompts for Manipulation}, 
+  author={Austin Patel and Ben Pekarek and Joel Enrique Castro Hernandez and Shuran Song},
+  year={2026},
+  journal={arXiv preprint arXiv:2606.30457},
+  url={https://arxiv.org/abs/2606.30457}
+}
 ```
 
 If you leverage the head-mounted support or any of the [HoMMI](https://hommi-robot.github.io/) features, please additionally cite:
