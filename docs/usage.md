@@ -123,8 +123,8 @@ If this setting doesn't show up then go to: Settings -> Sounds & Haptics -> Head
 
 <img src="media/xcode_signing.png" alt="Xcode signing" width="1200"/>
 
-- Enable Developer Mode on your iPhone following [these instructions](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device) on your device. This usually requires a phone reboot to complete. You can check if developer mode is enabled by opening the Settings app and scolling to the bottom. If there is a section for developer mode then it's enabled.
-- Connect your phone to the Mac device with a USB cable. Your phone will then prompt you to trust the computer.
+- Connect your phone to the Mac computer with a USB cable. Your phone will then prompt you to trust the computer.
+- Enable Developer Mode on your iPhone following [these instructions](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device) on your device. The setting for enabling developer mode may only appear if your phone is actively plugged into a Mac computer. This process usually requires a phone reboot to complete. You can check if developer mode is enabled by opening the Settings app and scolling to the bottom: if there is a section for developer mode then it's enabled.
 - Make sure your iPhone is connected to the internet in order for the app installation to properly sign.
 - Install app on your device through Xcode by selecting your device on the top bar and then pressing the run button. The first time you use a developer account on a device you will need to verify the developer in the Settings app on the iPhone: go to Settings -> General -> VPN & Device Management -> Trust the developer account. Now you will be able to open the installed app.
 - Accept all the permissions requested by the app on it's first launch to ensure the app will work properly.
