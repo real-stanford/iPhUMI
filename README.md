@@ -30,6 +30,9 @@ This repository contains both iOS application code in `ios_app` and an associate
 ## Documentation
 ### [Usage guide](docs/usage.md) - Follow this guide to get started with iPhUMI
 
+## Checkpoints
+[Gated Memory Policy](https://github.com/real-stanford/gated-memory-policy) has released an in-the-wild iPhUMI checkpoint you can deploy for a cup placement task in your environment.
+
 ## iPhUMI Data Initiaitve
 iPhUMI data, like all UMI data, is better when universally sharable! Please contribute your iPhUMI data to be listed on the [UMI Data Initiative](https://umi-data.github.io/) for others to use.
 
