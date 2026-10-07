@@ -54,11 +54,11 @@ We thank the following people for their contributions that helped make this proj
 - Cheng Chi, Zhenjia Xu, et. al., for the [original UMI](https://umi-gripper.github.io/) project
 
 ## Citation
-If you found iPhUMI useful in your research, please cite [Behavior Prompting Policy](https://behavior-prompting.github.io/):
+If you found iPhUMI useful in your research, please cite [What Enables In-Context Behavior Prompting for Manipulation?](https://behavior-prompting.github.io/):
 
 ```
-@article{patel2026bpp,
-  title={Behavior Prompting Policy: Demonstrations as Prompts for Manipulation}, 
+@article{patel2026behaviorprompting,
+  title={What Enables In-Context Behavior Prompting for Manipulation?},
   author={Austin Patel and Ben Pekarek and Joel Enrique Castro Hernandez and Shuran Song},
   year={2026},
   journal={arXiv preprint arXiv:2606.30457},

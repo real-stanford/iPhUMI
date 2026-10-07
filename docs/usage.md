@@ -501,7 +501,7 @@ Consider sharing your data with the community on the [UMI Data Initiative](https
 
 
 # Train a policy using iPhUMI data
-The code to train diffusion policy from iPhUMI data is located in the Behavior Prompting Policy repository. TODO. Please follow the instructions there.
+The code to train diffusion policy from iPhUMI data is located in the [behavior_prompting](https://github.com/real-stanford/behavior_prompting) repository. Please follow the instructions there.
 
 Since we have the ultrawide RGB at 10Hz and the rest of the data at 60Hz, you will need special logic in your dataset sampler to properly handle this. See the [Create dataset](#create-dataset) section for details on how to map between the 10Hz and 60Hz data. Our provided training code already handles this.
 
@@ -509,7 +509,7 @@ Since we have the ultrawide RGB at 10Hz and the rest of the data at 60Hz, you wi
 
 To deploy policies trained using iPhUMI, we add support for using the iPhone as the deployment camera on the robot. Note that unlike the original UMI with GoPro, we do not mask out the AR tags on the finger in the replay buffer. Therefore you can put the AR tags on the deployment robot (as pictured below) to minimize visual disparity, but in practice it doesn't seem to matter if you put the tags on the robot or not (or if you put on tags with the wrong identifier).
 
-You can find the iPhUMI deploymet code and instructions in the Behavior Prompting Policy repo. TODO. Currently we have validated iPhUMI deployment on bimanual ARX and on single arm UR5.
+You can find the iPhUMI deploymet code and instructions in the [behavior_prompting](https://github.com/real-stanford/behavior_prompting) repository. Currently we have validated iPhUMI deployment on bimanual ARX and on single arm UR5.
 
 <img src="media/robot_deployment.png" alt="robot_deployment" width="400"/>
 
