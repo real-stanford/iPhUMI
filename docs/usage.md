@@ -582,10 +582,10 @@ python test_iphone_ethernet_streaming.py --hosts 192.168.123.18 192.168.123.19
 If you are using an ARX arm, you can find the UMI mount [here](https://cad.onshape.com/documents/5271ff5a948a7f51a716e01a/w/e3126df2755b00dcbc5c3e44/e/a1d06c981a25bef960902412). This mount already has the mirrors removed (the original UMI design has mirrors).
 
 ### UR5
-If you are using WSG50 gripper on UR5, you can find the UMI mount [here](https://cad.onshape.com/documents/fea49753b2350f8700f47815). You will need to modify the mount to remove them mirrors.
+If you are using WSG50 gripper on UR5, you can find the UMI mount [here](https://cad.onshape.com/documents/fea49753b2350f8700f47815). You will need to modify the mount to remove the mirrors.
 
 ### Franka
-If you are using WSG50 gripper on Franka, you can find the UMI mount [here](https://cad.onshape.com/documents/10e70b8dbf6f9fe17c716739). You will need to modify the mount to remove them mirrors.
+If you are using WSG50 gripper on Franka, you can find the UMI mount [here](https://cad.onshape.com/documents/10e70b8dbf6f9fe17c716739). You will need to modify the mount to remove the mirrors.
 
 
 # Supporting additional iPhone models
